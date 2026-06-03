@@ -140,6 +140,7 @@ function renderExpenses() {
   const expenseList = document.querySelector('.expense-list') // Expense List
   const summaryText = document.querySelector('.expense-summary p') // Summary Info
   const expenseTotalDisp = document.querySelector('.expense-total-disp') as HTMLElement // Total Display
+  
 
   if (!expenseList || !summaryText || !expenseTotalDisp) {
     throw new Error('Required elements not found')
@@ -171,19 +172,35 @@ function renderExpenses() {
   summaryText.textContent = `Total expenses: ${expenses.length}`
   expenseTotalDisp.textContent = `Expense total: $${getTotalSpent().toFixed(2)}`
 
-}
-// End of Render Expenses Function
   
-// const deleteBtn = target.closest('.expense-delete') as HTMLElement
-//          if (!deleteBtn) {
-//           throw new Error("Delete button does't exist")
-//         }
+  const deleteBtn = document.querySelector('.expense-delete') as HTMLElement
+          if (!deleteBtn) {
+           throw new Error("Delete button does't exist")
+         }
 
-// const expenseId = deleteBtn.getAttribute('data-expense-id')
-//        if (!expenseId) return
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', () => {
+          const expenseId = deleteBtn.getAttribute('data-expense-id')
 
-// console.log(expenseId) // delete logic
-// expenses.splice(expenseIndex, 1) // delete logic
+          if (!expenseId) return
+          console.log(expenseId)
+          const expenseIndex = expenses.findIndex((expense) => expense.id === expenseId)
+          
+          if (expenseIndex === -1) return
+          expenses.splice(expenseIndex, 1)
+          console.log(expenses)
+          renderExpenses()
+        }
+      )}
+}
+          
+            
+// End of Render Expenses Function
+
+// 
+
+ // delete logic
+//  // delete logic
 // renderExpenses()
 
 
@@ -194,25 +211,9 @@ function renderExpenses() {
 //})
 
 
-//const expenseIndex = expenses.findIndex((expense) => expense.id === expenseId) // for delete logic
-
-
 // if (!inputTitle.value || !inputCategory.value) {
   //      alert("Fields required")
   //      return
   
-    
-
-    
-
-
- 
-
-
-    
-
-      // if (expenseIndex === -1) return
-
-      
 
       initialSetup()
