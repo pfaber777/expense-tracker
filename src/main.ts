@@ -193,27 +193,6 @@ function renderExpenses() {
         }
       )}
 }
-          
-            
 // End of Render Expenses Function
-
-// 
-
- // delete logic
-//  // delete logic
-// renderExpenses()
-
-
-
-// console.log(newExpense)
-
-
-//})
-
-
-// if (!inputTitle.value || !inputCategory.value) {
-  //      alert("Fields required")
-  //      return
-  
 
       initialSetup()
