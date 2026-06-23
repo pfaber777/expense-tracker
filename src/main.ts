@@ -30,46 +30,54 @@ function initialSetup() {
       throw new Error('App container not found')
     }
   // App Shell render
-    app.innerHTML = `<section>
+    app.innerHTML = `
+    <div class="app-main">
+    <section class="app-header">
       <header>
-        <h1>Expense Tracker</h1>
+        <h1 class="app-title">Expense Tracker</h1>
       </header>
     </section>
     <section class="form-container">
       <form action="" class='expense-form'>
-        <label for='title'>Title</label>
-        <input type='text' id='title' name='expense-title'/>
+        <div class="input-fields">
+          <label for='title'>Title</label>
+          <input class="input-style" type='text' id='title' name='expense-title'/>
+        </div>
 
-        <label for='amount'>Amount</label>
-        <input type='number' id='amount' name='expense-amount'/>
+        <div class="input-fields">
+          <label for='amount'>Amount</label>
+          <input class="input-style" type='number' id='amount' name='expense-amount'/>
+        </div>
 
-        <label for='category'>Category</label>
-        <input type='text' id='category' name='categories'/>
+        <div class="input-fields">
+          <label for='category'>Category</label>
+          <input class="input-style" type='text' id='category' name='categories'/>
+        </div>
 
-        <label for='date'>Date</label>
-        <input type='date' id='date' name='dates' min='2026-04-23' max='2026-12-12'/>
-        <button type="submit">Submit expense</button>
-      </form>
+        <div class="input-fields">
+          <label for='date'>Date</label>
+          <input class="input-style" type='date' id='date' name='dates' min='2026-04-23' max='2026-12-12'/>
+        </div>
+          <button class="submit-btn" type="submit">Submit expense</button>
+        </form>
     </section>
 
-    <section>
+    <section class="expense-section">
       <div class="expense-list-container">
-      <h2>Expenses</h2>
+      <h2 class="expenses-heading">Expenses</h2>
         <ul class="expense-list">
         </ul>
       </div>
     </section>
     
-    <section>
+    <section class="summary-section">
     <div class="expense-summary">
-    <h2>Summary</h2>
-      <p>Total expenses: ${expenses.length}</p>
-    </div>
-    <div class='expense-display'>
-      <h2>Total spent</h2>
-      <p class='expense-total-disp'>Expense total: $${getTotalSpent().toFixed(2)}</p>
+    <h2 class="summary-heading">Summary</h2>
+    <p>Total expenses: ${expenses.length}</p>
+    <p class='expense-total-disp'>Expense total: $${getTotalSpent().toFixed(2)}</p>
     </div>
   </section>
+  </div>
   `
 
   // APP SHELL UI elements
@@ -158,10 +166,12 @@ function renderExpenses() {
   const expenseItemMarkup = expenses.map((expense) => {
   return`
     <li class="list-item">
-    <h3>${expense.title}</h3>
+    <h3 class="item-heading">${expense.title}</h3>
+    <span class="item-specs">
     <p>Amount: $${expense.amount.toFixed(2)}</p>
     <p>Category: ${expense.category}</p>
     <p>Date: ${expense.date}</p>
+    </span>
     <button class="expense-delete" data-expense-id="${expense.id}">Remove</button>
     </li>
     `
@@ -178,8 +188,8 @@ function renderExpenses() {
            throw new Error("Delete button does't exist")
          }
 
-        if (deleteBtn) {
-          deleteBtn.addEventListener('click', () => {
+        if (expenseList) {
+          expenseList.addEventListener('click', () => {
           const expenseId = deleteBtn.getAttribute('data-expense-id')
 
           if (!expenseId) return
