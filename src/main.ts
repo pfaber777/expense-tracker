@@ -51,7 +51,10 @@ function initialSetup() {
 
         <div class="input-fields">
           <label for='category'>Category</label>
-          <input class="input-style" type='text' id='category' name='categories'/>
+          <select class="input-style" type='text' id='categories' name='category'/>
+            <option>Home Essentials</option>
+            <option>Work</option>
+            <option>Entertainment & Leasure</option>
         </div>
 
         <div class="input-fields">
